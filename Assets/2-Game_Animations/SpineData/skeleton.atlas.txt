@@ -1,0 +1,89 @@
+
+skeleton.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Juuksed
+  rotate: true
+  xy: 480, 694
+  size: 314, 542
+  orig: 333, 558
+  offset: 11, 9
+  index: -1
+KehaVäike
+  rotate: false
+  xy: 2, 218
+  size: 476, 790
+  orig: 479, 792
+  offset: 3, 2
+  index: -1
+PKJalgVäike
+  rotate: true
+  xy: 480, 223
+  size: 160, 456
+  orig: 168, 465
+  offset: 8, 0
+  index: -1
+PeaVäike
+  rotate: true
+  xy: 480, 385
+  size: 307, 487
+  orig: 502, 558
+  offset: 195, 64
+  index: -1
+VKJalgVäike
+  rotate: true
+  xy: 573, 55
+  size: 166, 446
+  orig: 187, 455
+  offset: 9, 9
+  index: -1
+VÜJalgVäike
+  rotate: true
+  xy: 2, 2
+  size: 214, 569
+  orig: 228, 576
+  offset: 10, 0
+  index: -1
+
+skeleton2.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+PJalalabaVäike
+  rotate: false
+  xy: 611, 237
+  size: 199, 136
+  orig: 199, 155
+  offset: 0, 10
+  index: -1
+PÜJalgVäike
+  rotate: false
+  xy: 2, 2
+  size: 210, 492
+  orig: 213, 504
+  offset: 3, 9
+  index: -1
+RiideRibaVäike
+  rotate: true
+  xy: 214, 39
+  size: 154, 337
+  orig: 164, 359
+  offset: 9, 13
+  index: -1
+SeelikVäike
+  rotate: false
+  xy: 214, 195
+  size: 395, 299
+  orig: 395, 300
+  offset: 0, 0
+  index: -1
+VJalalabaVäike
+  rotate: false
+  xy: 611, 375
+  size: 221, 119
+  orig: 225, 121
+  offset: 0, 2
+  index: -1
