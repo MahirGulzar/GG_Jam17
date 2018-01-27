@@ -215,7 +215,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7cee5815930e624ba1d2cf2f93a338b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 1788617456}
+  Darker: {fileID: 0}
+  Lighter: {fileID: 0}
+  prompts: []
+  promptPositions: []
+  ThoughtBubble: {fileID: 0}
+  UIText: {fileID: 0}
+  TotalDecisions: 0
+  correctOnes: 0
+  wrongeOnes: 0
 --- !u!1 &16252150
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +329,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.13, y: 1}
+    oldSize: {x: 0.63, y: 0.56}
     newSize: {x: 1.13, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

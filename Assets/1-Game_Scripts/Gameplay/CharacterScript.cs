@@ -7,6 +7,7 @@ public class CharacterScript : MonoBehaviour {
 
     Animator anim;
     SkeletonAnimation skeletonAnimation;
+    public EventHandler eventHandler;
 
     public bool flipped = false;
     float speed=1.8f;
@@ -58,5 +59,14 @@ public class CharacterScript : MonoBehaviour {
         }
 
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, initX, 195), transform.position.y, transform.position.z);
+    }
+
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("yeess.. here..");
+        Destroy(collision.gameObject.GetComponent<Collider2D>());
+        eventHandler.DoPrompt();
     }
 }

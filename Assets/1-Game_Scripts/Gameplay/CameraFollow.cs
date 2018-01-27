@@ -19,15 +19,15 @@ public class CameraFollow : MonoBehaviour {
     {
         Vector3 viewPosition = Camera.main.WorldToViewportPoint(player.transform.position);
 
-        if (viewPosition.x > 0.7f && !move) // move right
+        if (viewPosition.x > 0.6f && !move) // move right
         {
-            print("move right...");
+            //print("move right...");
             move = true;
             offset = transform.position - player.transform.position;
         }
         else if (viewPosition.x < 0.2f && !move )  // move left
         {
-            print("move left...");
+            //print("move left...");
             move = true;
             offset = transform.position - player.transform.position;
         }
