@@ -24,13 +24,5 @@ public class EventHandler : MonoBehaviour {
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            anim.SetBool("Move", true);
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            anim.SetBool("Move", false);
-        }
     }
 }
