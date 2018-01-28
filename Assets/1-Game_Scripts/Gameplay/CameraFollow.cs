@@ -62,7 +62,7 @@ public class CameraFollow : MonoBehaviour {
 
         // Clamp camera on x-axis
 
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, 0, 200), transform.position.y, -10);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, 0, 1200), transform.position.y, -10);
 
 
 

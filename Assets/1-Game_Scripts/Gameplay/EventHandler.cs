@@ -9,15 +9,16 @@ public class EventHandler : MonoBehaviour {
 
     public LensAberrations Darker;
     public Bloom Lighter;
+    public CharacterScript character;
 
     public List<GameObject> prompts = new List<GameObject>();
     public List<Vector2> promptPositions = new List<Vector2>();
     public List<GameObject> Responses = new List<GameObject>();
 
     public GameObject Overlay;
+    public GameObject PauseMenu;
+    public GameObject ResumeButton,MainMenuButton;
 
-    public GameObject ThoughtBubble;
-    public Text UIText;
 
     public int TotalDecisions;
     [Range(0, 15)]
@@ -45,7 +46,7 @@ public class EventHandler : MonoBehaviour {
 
     public void DoPrompt()
     {
-
+        character.Interacting = true;
         prompts[currentIndex].transform.FindChild("SpeechBubble").gameObject.SetActive(true);
         StartCoroutine(DelayDialogues());
         currentIndex++;
@@ -58,6 +59,7 @@ public class EventHandler : MonoBehaviour {
         prompts[currentIndex - 1].SetActive(false);
         Overlay.SetActive(false);
         Responses[currentIndex - 1].SetActive(true);
+        character.Interacting = false;
         correctOnes++;
     }
 
@@ -66,6 +68,7 @@ public class EventHandler : MonoBehaviour {
         prompts[currentIndex - 1].SetActive(false);
         Overlay.SetActive(false);
         Responses[currentIndex - 1].SetActive(false);
+        character.Interacting = false;
         wrongeOnes++;
     }
 
@@ -103,12 +106,31 @@ public class EventHandler : MonoBehaviour {
     {
         // Pause funcitionality
         Debug.Log("Pause funcitionality");
+        Overlay.SetActive(true);
+        PauseMenu.SetActive(true);
+        ResumeButton.GetComponent<TweenScale>().ResetAndPlay();
+        MainMenuButton.GetComponent<TweenScale>().ResetAndPlay();
+        
+        Time.timeScale = 0;
+
+    }
+
+    public void OnResume()
+    {
+        // Pause funcitionality
+        Time.timeScale = 1;
+        Overlay.SetActive(false);
+        PauseMenu.SetActive(false);
+        Debug.Log("Resume funcitionality");
+
     }
 
 
     public void OnMainMenu()
     {
         // Main Menu funcitionality
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
         Debug.Log("Main Menu funcitionality");
         SceneManager.LoadScene("MainMenuScene");
     }

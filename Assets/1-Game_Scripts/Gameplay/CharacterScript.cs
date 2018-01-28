@@ -10,8 +10,9 @@ public class CharacterScript : MonoBehaviour {
     public EventHandler eventHandler;
 
     public bool flipped = false;
-    float speed=1.8f;
+    float speed=10f;
     float initX;
+    public bool Interacting = false;
 
 	// Use this for initialization
 	void Start () {
@@ -23,42 +24,49 @@ public class CharacterScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (!Interacting)
         {
-            flipped = false;
-            this.transform.rotation = Quaternion.Euler(transform.rotation.x, 0, 0);
-            anim.SetBool("Move", true);
-            
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                flipped = false;
+                this.transform.rotation = Quaternion.Euler(transform.rotation.x, 0, 0);
+                anim.SetBool("Move", true);
+
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                flipped = true;
+                this.transform.rotation = Quaternion.Euler(transform.rotation.x, 180, 0);
+                anim.SetBool("Move", true);
+            }
+            else if (Input.GetKeyUp(KeyCode.D))
+            {
+                anim.SetBool("Move", false);
+            }
+            else if (Input.GetKeyUp(KeyCode.A))
+            {
+                anim.SetBool("Move", false);
+            }
+
+
+
+            // Movement
+
+
+            if (anim.GetBool("Move"))
+            {
+                if (!flipped)
+                    transform.position += Vector3.right * speed * Time.deltaTime;
+                else
+                    transform.position += Vector3.left * speed * Time.deltaTime;
+            }
+
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, initX, 195), transform.position.y, transform.position.z);
         }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            flipped = true;
-            this.transform.rotation = Quaternion.Euler(transform.rotation.x, 180, 0);
-            anim.SetBool("Move", true);
-        }
-        else if (Input.GetKeyUp(KeyCode.D))
+        else
         {
             anim.SetBool("Move", false);
         }
-        else if (Input.GetKeyUp(KeyCode.A))
-        {
-            anim.SetBool("Move", false);
-        }
-
-
-
-        // Movement
-
-
-        if(anim.GetBool("Move"))
-        {
-            if(!flipped)
-                transform.position += Vector3.right* speed * Time.deltaTime;
-            else
-                transform.position += Vector3.left * speed * Time.deltaTime;
-        }
-
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, initX, 195), transform.position.y, transform.position.z);
     }
 
 

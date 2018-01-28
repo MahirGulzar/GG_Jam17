@@ -11,12 +11,13 @@ public class MainMenu : MonoBehaviour {
     {
         // play funcitionality
         Debug.Log("play funcitionality");
-        SceneManager.LoadScene("GameplayScene");
+        SceneManager.LoadScene("Gameplay");
     }
 
     public void OnQuit()
     {
         // Quit funcitionality
+        Application.Quit();
         Debug.Log("quit funcitionality");
     }
 
