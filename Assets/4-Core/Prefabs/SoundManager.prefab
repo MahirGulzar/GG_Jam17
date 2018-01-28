@@ -354,7 +354,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Looper: {fileID: 82657984552689560}
   OneShotLooper: {fileID: 82138259137859626}
-  BGz: []
+  BGz:
+  - {fileID: 8300000, guid: ea034f07c2646354c94c498e59d57eec, type: 3}
   Buttons: []
   Swish: {fileID: 0}
   LevelCompleted: {fileID: 0}

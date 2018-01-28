@@ -10,7 +10,7 @@ public class CharacterScript : MonoBehaviour {
     public EventHandler eventHandler;
 
     public bool flipped = false;
-    float speed=10f;
+    float speed=2.5f;
     float initX;
     public bool Interacting = false;
 
@@ -61,7 +61,7 @@ public class CharacterScript : MonoBehaviour {
                     transform.position += Vector3.left * speed * Time.deltaTime;
             }
 
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, initX, 195), transform.position.y, transform.position.z);
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, initX, 269.5f), transform.position.y, transform.position.z);
         }
         else
         {
@@ -73,7 +73,7 @@ public class CharacterScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("yeess.. here..");
+        //print("yeess.. here..");
         Destroy(collision.gameObject.GetComponent<Collider2D>());
         eventHandler.DoPrompt();
     }

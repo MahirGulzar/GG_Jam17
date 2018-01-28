@@ -10,6 +10,7 @@ public class EventHandler : MonoBehaviour {
     public LensAberrations Darker;
     public Bloom Lighter;
     public CharacterScript character;
+    public Fading Fade;
 
     public List<GameObject> prompts = new List<GameObject>();
     public List<Vector2> promptPositions = new List<Vector2>();
@@ -18,6 +19,9 @@ public class EventHandler : MonoBehaviour {
     public GameObject Overlay;
     public GameObject PauseMenu;
     public GameObject ResumeButton,MainMenuButton;
+
+    public GameObject winScreen, LoseScreen;
+    public GameObject Lightening;
 
 
     public int TotalDecisions;
@@ -30,16 +34,21 @@ public class EventHandler : MonoBehaviour {
 
     int currentIndex=0;
 
+    public int DecisionCounter = 0;
+
 
     private void Start()
     {
+        Fade.BeginFade(-1);
+        //yield return new WaitForSeconds(fadeTime);
+
         TotalDecisions = Responses.Count;
     }
 
 
     private void Update()
     {
-        Configure_Environment();
+        
     }
 
 
@@ -58,9 +67,12 @@ public class EventHandler : MonoBehaviour {
     {
         prompts[currentIndex - 1].SetActive(false);
         Overlay.SetActive(false);
-        Responses[currentIndex - 1].SetActive(true);
+        Responses[currentIndex - 1].SetActive(false);
         character.Interacting = false;
         correctOnes++;
+        DecisionCounter++;
+        Configure_Environment();
+
     }
 
     public void Wronge()
@@ -70,23 +82,48 @@ public class EventHandler : MonoBehaviour {
         Responses[currentIndex - 1].SetActive(false);
         character.Interacting = false;
         wrongeOnes++;
+        DecisionCounter++;
+        Configure_Environment();
     }
 
 
     void Configure_Environment()
     {
+        Lightening.SetActive(true);
+        StartCoroutine(doLight());
         float darkpercentage = (float)((float)wrongeOnes / (float)TotalDecisions);
-        Darker.vignette.intensity = 2 * darkpercentage;
+        Darker.vignette.intensity = 1.5f * darkpercentage;
 
         float lightpercentage = (float)((float)correctOnes / (float)TotalDecisions);
-        Lighter.settings.intensity = 2 * lightpercentage;
+        Lighter.settings.intensity = 0.25f * lightpercentage;
+
+        if(DecisionCounter >= TotalDecisions)
+        {
+            character.Interacting = true;
+            if (correctOnes>=10)
+            {
+                winScreen.SetActive(true);
+                // Win..
+                print("win..");
+                
+            }
+            else
+            {
+                LoseScreen.SetActive(true);
+                print("lose..");
+                // Lose..
+            }
+
+            
+            StartCoroutine(LoadDelayedScene());
+        }
     }
 
 
 
     IEnumerator DelayDialogues()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         Overlay.SetActive(true);
         Responses[currentIndex - 1].SetActive(true);
 
@@ -130,11 +167,37 @@ public class EventHandler : MonoBehaviour {
     {
         // Main Menu funcitionality
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainMenuScene");
         Debug.Log("Main Menu funcitionality");
+        float fadeTime=Fade.BeginFade(1);
+        StartCoroutine(LoadSceneRoutine(fadeTime));
+        
+    }
+
+
+    IEnumerator doLight()
+    {
+
+        yield return new WaitForSeconds(0.4f);
+        Lightening.SetActive(false);
+    }
+
+    IEnumerator LoadSceneRoutine(float fadeTime)
+    {
+        Fade.BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
         SceneManager.LoadScene("MainMenuScene");
     }
-    
+
+
+    IEnumerator LoadDelayedScene()
+    {
+        yield return new WaitForSeconds(4f);
+        float fadeTime = Fade.BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
 
 
 }
